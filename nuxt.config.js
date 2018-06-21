@@ -17,6 +17,22 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  /* 
+  ** CSS Import
+  */
+ css: [
+   { src: '~/assets/scss/main.scss', lang: 'scss'},
+  ],
+  modules: [
+    ['nuxt-sass-resources-loader', '@/assets/scss/variables.scss'],
+    ['storyblok-nuxt', {
+      accessToken: '48rZW3Lkw1m5tttJrhk9Pwtt',
+      cacheProvider: 'memory'
+    }]
+  ],
+  plugins: [
+    '~/plugins/components.js'
+  ],
   /*
   ** Build configuration
   */

@@ -1,64 +1,76 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        benevolence
-      </h1>
-      <h2 class="subtitle">
-        Exhibtion of Man and Leisure department Design Academy Eindhoven
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
+  <section class="wrapper">
+    <div class="row slide">
+      <div class="col">
+        <h1 class= "title">{{story.content.title}}</h1>
       </div>
+    </div>
+    <div class="row slide intro">
+        <div class="col">
+          <p>{{story.content.intro}}</p>
+        </div>
+    </div>
+    <div class="row projects">
+      <project-detail v-for="project in story.content.projects" :key="project._uid" :project="project" />
     </div>
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
 export default {
-  components: {
-    AppLogo
+  data () {
+    return {
+      story: { content: {} }
+    }
+  },
+  mounted () {
+    this.$storyblok.init()
+    this.$storyblok.on('change', function () {
+      window.location.reload()
+    })
+  },
+  asyncData (context) {
+    return context.app.$storyapi.get('cdn/stories/home', {
+      version: 'draft'
+    }).then((res) => {
+      return res.data
+    }).catch((res) => {
+      context.error({ statusCode: res.response.status, message: res.response.data })
+    })
   }
 }
 </script>
 
-<style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+<style lang='scss' scoped>
+.row {
+  margin: 0;
   text-align: center;
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+  font-size: 13rem;
+  text-transform: uppercase;
+  z-index: 999;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.intro {
+  padding: 0 17.5rem;
+  background: #000;
 }
 
-.links {
-  padding-top: 15px;
+.slide {
+  position: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects {
+  min-height: 100vh;
+}
+
+p {
+  font-size: 3rem;
+  text-align: left;
+  line-height: 3.3rem;
 }
 </style>
