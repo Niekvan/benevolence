@@ -1,17 +1,27 @@
 <template>
   <section class="wrapper">
-    <div class="row slide">
-      <div class="col">
+    <div class="row slide center">
+      <div class="col" v-editable="story.content">
         <h1 class= "title">{{story.content.title}}</h1>
       </div>
     </div>
-    <div class="row slide intro">
-        <div class="col">
+    <div class="row slide intro center">
+      <div class="container">
+        <div class="col" v-editable="story.content">
           <p>{{story.content.intro}}</p>
         </div>
+      </div>
     </div>
     <div class="row projects">
-      <project-detail v-for="project in story.content.projects" :key="project._uid" :project="project" />
+      <div class="container">
+        <h4>Projects:</h4>
+        <project-list :projects="story.content.projects" />
+      </div>
+    </div>
+    <div class="row slide">
+      <div class="container information">
+        <info-list :data="story.content.information[0]" />
+      </div>
     </div>
   </section>
 </template>
@@ -54,11 +64,10 @@ export default {
 }
 
 .intro {
-  padding: 0 17.5rem;
   background: #000;
 }
 
-.slide {
+.center {
   position: flex;
   align-items: center;
   justify-content: center;
@@ -66,10 +75,19 @@ export default {
 
 .projects {
   min-height: 100vh;
+  box-sizing: border-box;
+  padding: 5rem 0;
+  h4 {
+    margin-bottom: 3rem;
+  }
+}
+
+.information {
+  // text-align: left;
 }
 
 p {
-  font-size: 3rem;
+  font-size: $font-size-body-large;
   text-align: left;
   line-height: 3.3rem;
 }

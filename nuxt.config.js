@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 module.exports = {
   /*
   ** Headers of the page
@@ -24,11 +26,12 @@ module.exports = {
    { src: '~/assets/scss/main.scss', lang: 'scss'},
   ],
   modules: [
+    '@nuxtjs/moment',
     ['nuxt-sass-resources-loader', '@/assets/scss/variables.scss'],
     ['storyblok-nuxt', {
       accessToken: '48rZW3Lkw1m5tttJrhk9Pwtt',
       cacheProvider: 'memory'
-    }]
+    }],
   ],
   plugins: [
     '~/plugins/components.js'
@@ -49,6 +52,20 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+    },
+  },
+  generate: {
+    routes: function () {
+      return axios.get(`https://api.storyblok.com/v1/cdn/stories?version=published&token=48rZW3Lkw1m5tttJrhk9Pwtt&starts_with=projects/&cv` + Math.floor(Date.now() / 1e3)
+      ).then(res => {
+        // console.log(res)
+        const routes = res.data.stories.map(route => route.full_slug)
+        console.log(routes)
+        return [
+          '/',
+          ...routes
+        ]
+      })
     }
   }
 }
