@@ -40,6 +40,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    vendors: ['basicscroll'],
     /*
     ** Run ESLint on save
     */
