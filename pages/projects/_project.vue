@@ -38,7 +38,7 @@
 <script>
 let basicScroll
 if (process.browser) {
-  basicScroll = require('basicScroll')
+  basicScroll = require('basicscroll')
 }
 
 export default {
