@@ -58,9 +58,7 @@ module.exports = {
     routes: function () {
       return axios.get(`https://api.storyblok.com/v1/cdn/stories?version=published&token=48rZW3Lkw1m5tttJrhk9Pwtt&starts_with=projects/&cv` + Math.floor(Date.now() / 1e3)
       ).then(res => {
-        // console.log(res)
         const routes = res.data.stories.map(route => route.full_slug)
-        console.log(routes)
         return [
           '/',
           ...routes

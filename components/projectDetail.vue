@@ -1,12 +1,12 @@
 <template>
-  <div class="project" v-editable="project">
-    <p class="designer">{{project.designer}}</p>
-    <div class="links">
+  <div class="project row" v-editable="project">
+    <p class="designer col-2">{{project.designer}}</p>
+    <div class="links col-10">
       <p class="link" v-editable="singleProject" v-for="(singleProject, index) in project.projects" :key="singleProject._uid">
         <nuxt-link :to="`/${singleProject.link.cached_url}`">{{singleProject.title}}</nuxt-link>
         <span v-if="index === project.projects.length - 1">.</span>
         <span v-else class="comma">,</span>
-        <img-resize class="image-cover" :link="singleProject.cover_image" size="400x0" />
+        <img-resize class="image-cover" :link="singleProject.cover_image" size="600x0" />
       </p>
     </div>
   </div>
@@ -23,8 +23,6 @@ export default {
 
 <style lang="scss" scoped>
   .project {
-    width: 50%;
-    margin: auto;
     text-align: left;
     position: relative;
 
@@ -32,21 +30,20 @@ export default {
       &.links {
         position: relative;
         display: inline-block;
-        width: 75%;
       }
     }
     p {
       display: inline-block;
 
       &.designer {
-        font-size: $font-size-body;
+        // font-size: $font-size-body;
         font-weight: 200;
         text-transform: capitalize;
-        width: 25%;
+        text-align: left;
       }
 
       &.link {
-        font-size: 2rem;
+        // font-size: 2rem;
         color: $color-type-primary;
         text-decoration: none;
 

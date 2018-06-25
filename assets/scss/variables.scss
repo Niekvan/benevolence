@@ -9,8 +9,19 @@ $font-size-body-large: 3rem;
 $font-size-title: 5rem;
 $font-size-title-spread: 14rem;
 
+@mixin smaller {
+  @include media-breakpoint-up(sm) {
+    font-size: $font-size-body;
+    line-height: $font-size-body+0.25*($font-size-body);
+  } // @include media-breakpoint-up(lg) {
+  //   font-size: $font-size-body;
+  //   line-height: $font-size-body+0.25*($font-size-body);
+  // }
+}
+
 /* OTHER VARIABLES */
 $height-line-link: 0.2rem;
 
+@import "~bootstrap/scss/_mixins.scss";
 @import "~bootstrap/scss/_functions.scss";
 @import "~bootstrap/scss/_variables.scss";

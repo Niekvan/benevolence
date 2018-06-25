@@ -2,16 +2,20 @@
   <section class="col-12">
     <div class="row">
       <div class="col-12 info">
-        <h5>Info:</h5>
+        <h4>Info:</h4>
         <p v-editable="data">{{data.info}}</p>
       </div>
       <div class="col-12 dates">
-        <h5>Dates:</h5>
+        <h4>Dates:</h4>
         <ul>
           <li v-editable="date" v-for="date in data.dates" :key="date._uid">{{dateFormat(date.date_start)}} - {{dateFormat(date.date_end)}} {{date.place}}
             <span class="info" v-if="date.info"><br>{{date.info}}</span>
           </li>
         </ul>
+      </div>
+      <div class="col-12 partners">
+        <h4>Our partners:</h4>
+        
       </div>
     </div>
   </section>
@@ -32,21 +36,20 @@ export default {
   section {
     text-align: left;
 
-    p {
-      font-size: $font-size-body;
-      line-height: $font-size-body + 0.25*($font-size-body);
-    }
-
     .dates, .info {
       margin-top: 2rem;
+    }
+
+    p {
+      @include smaller;
     }
 
     ul {
       list-style: none;
       padding-left: 0;
-      font-size: $font-size-base * 1.5;
 
       li {
+        @include smaller;
         .info {
           padding-left: 0.5rem;
           font-style: italic;
