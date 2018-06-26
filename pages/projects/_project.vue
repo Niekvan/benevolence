@@ -34,6 +34,14 @@
           </div>
         </div>
       </div>
+      <div class="row pagination">
+        <div class="col-6 prev">
+          <nuxt-link :to="`/${this.projects[prev].full_slug}`">Previous project</nuxt-link>
+        </div>
+        <div class="col-6 next">
+          <nuxt-link :to="`/${this.projects[next].full_slug}`">Next project</nuxt-link>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -59,6 +67,26 @@ export default {
     sizeSmall() {
       return "700x0"
     },
+    projects() {
+      return this.$store.state.projects
+    },
+    currentProject() {
+      return this.projects.findIndex(x => x.slug === this.$route.params.project)
+    },
+    next() {
+      if (this.currentProject === this.projects.length - 1) {
+        return 0
+      } else {
+        return this.currentProject + 1
+      }
+    },
+    prev() {
+      if (this.currentProject === 0) {
+        return this.projects.length - 1
+      } else {
+        return this.currentProject - 1
+      }
+    }
   },
   methods: {
     getWidth(event) {
@@ -111,7 +139,7 @@ export default {
     }).then((res) => {
       return res.data
     }).catch((res) => {
-      context.error({ statusCode: res.response.status, message: res.response.data })
+      context.error({ statusCode: res})
     })
   }
 }
@@ -190,6 +218,19 @@ export default {
 
     img {
       width: 100%;
+    }
+  }
+
+  .pagination {
+    position: relative;
+    z-index: 999;
+    padding-bottom: 1rem;
+    a {
+      color: $color-type-primary;
+      font-size: $font-size-body;
+    }
+    .next {
+      text-align: right;
     }
   }
 </style>

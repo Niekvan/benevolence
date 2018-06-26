@@ -78,6 +78,10 @@ export default {
 
     transition: all 0.3s;
 
+    a {
+      color: $color-type-primary;
+    }
+
     &.active {
       width: 100%;
       box-sizing: border-box;
