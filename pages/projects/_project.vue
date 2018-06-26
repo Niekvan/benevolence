@@ -1,34 +1,37 @@
 <template>
-  <section class="container">
-    <div class="row">
-      <div class="col-12 col-xl-10">
-        <h1 class="title">{{story.content.title}}</h1>
-      </div>
-    </div>
-    <div class="row project-details" v-editable="story.content">
-      <div class="col-12 col-md-3 designer">
-        <p>{{story.content.designer}}</p>
-      </div>
-      <div class="col-12 col-md-7 intro">
-        <p>{{story.content.intro}}</p>
-      </div>
-    </div>
-    <div class="row cover-image">
-      <div class="col-12">
-        <img-resize :size="size" :link="story.content.coverImage" />
-      </div>
-    </div>
-    <div class="row project-images">
-      <div class="col-12 col-md-6 element" :class="image.component === 'textProject' ? 'text-project':'image-project'" v-for="image in story.content.images" :key="image._uid" :data-modifier="image.component">
-        <div v-if="image.component === 'imageProject'">
-          <!-- <div class="col-12 col-md-6"> -->
-            <img-resize :size="sizeSmall" :link="image.image"/>
-          <!-- </div> -->
+  <section>
+    <Menu />
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-xl-10">
+          <h1 class="title">{{story.content.title}}</h1>
         </div>
-        <div v-if="image.component === 'textProject'">
-          <!-- <div class="col-12 col-md-6"> -->
-            <p>{{image.text}}</p>
-          <!-- </div> -->
+      </div>
+      <div class="row project-details" v-editable="story.content">
+        <div class="col-12 col-md-3 designer">
+          <p>{{story.content.designer}}</p>
+        </div>
+        <div class="col-12 col-md-7 intro">
+          <p>{{story.content.intro}}</p>
+        </div>
+      </div>
+      <div class="row cover-image">
+        <div class="col-12">
+          <img-resize :size="size" :link="story.content.coverImage" />
+        </div>
+      </div>
+      <div class="row project-images">
+        <div class="col-12 col-md-6 element" :class="image.component === 'textProject' ? 'text-project':'image-project'" v-for="image in story.content.images" :key="image._uid" :data-modifier="image.component">
+          <div v-if="image.component === 'imageProject'">
+            <!-- <div class="col-12 col-md-6"> -->
+              <img-resize :size="sizeSmall" :link="image.image"/>
+            <!-- </div> -->
+          </div>
+          <div v-if="image.component === 'textProject'">
+            <!-- <div class="col-12 col-md-6"> -->
+              <p>{{image.text}}</p>
+            <!-- </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -69,10 +72,10 @@ export default {
     startAnimation() {
       this.start = true
       document.querySelectorAll('.element').forEach((elem, i) => {
-        const direction = elem.getAttribute('data-modifier') === 'imageProject' ? {from: '0', to: '-100px'} : {from: '0', to: '250px'}
+        const direction = elem.getAttribute('data-modifier') === 'imageProject' ? {from: '0', to: '-100px'} : {from: '0', to: '200px'}
         this.instances.push(basicScroll.create({
         elem: elem,
-        from: 'top-bottom',
+        from: 'middle-bottom',
         to: 'bottom-top',
         direct: true,
         props: {

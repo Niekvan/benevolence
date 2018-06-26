@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper">
-    <div class="row slide center overflow">
+    <div class="row slide center overflow" id="home">
       <img-resize :link="randomImage.image" :size="size" class="random-image" :style="placement" />
       <div class="col-12">
         <h1 class="title" v-editable="story.content">{{story.content.title}}</h1>
@@ -13,13 +13,13 @@
         </div>
       </div>
     </div>
-    <div class="projects">
+    <div class="projects" id="projects">
       <div class="container">
         <h4>Projects:</h4>
         <project-list :projects="story.content.projects" />
       </div>
     </div>
-    <div class="row slide">
+    <div class="row slide" id="about">
       <div class="container information">
         <info-list :data="story.content.information[0]" />
       </div>

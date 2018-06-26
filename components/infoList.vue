@@ -15,14 +15,32 @@
       </div>
       <div class="col-12 partners">
         <h4>Our partners:</h4>
-        
+        <slick ref="slick" :options="slickOptions">
+          <img-resize v-for="image in data.logos" :key="image._uid" :link="image.image" size="300x0" class="logo" />
+        </slick>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import '~/node_modules/slick-carousel/slick/slick.css'
 export default {
+  data () {
+    return {
+      slickOptions: {
+        slidesToShow: 3,
+        slidesToscroll: 1,
+        autoplay: true,
+        autoplaySpeed: 0,
+        cssEase: 'linear',
+        speed: 5000,
+        arrows: false,
+        pauseOnHover: false,
+        mobileFirst: true
+      },
+    }
+  },
   props: ['data'],
   methods: {
     dateFormat(date) {
@@ -55,6 +73,10 @@ export default {
           font-style: italic;
         }
       }
+    }
+
+    .logo {
+      padding: 0.5rem;
     }
   }
 </style>

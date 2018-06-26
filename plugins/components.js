@@ -5,7 +5,10 @@ import projectList from '~/components/projectList.vue'
 import infoList from '~/components/infoList.vue'
 import imageResize from '~/components/imageResize.vue'
 
+import Menu from '~/components/menu.vue'
+
 Vue.component('project-detail', projectDetail)
 Vue.component('project-list', projectList)
 Vue.component('info-list', infoList)
 Vue.component('img-resize', imageResize)
+Vue.component('Menu', Menu)
