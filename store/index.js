@@ -8,18 +8,18 @@ const createStore = () => {
     },
     mutations: {
       setStories(state, data) {
-        state.projects = data.stories
+        state.projects = data
       }
     },
     actions: {
-      nuxtServerInit({ commit }, { query, isDev }) {
+      async nuxtServerInit({ commit }, { query, isDev }) {
         console.log('server init....')
         let version = query._storyblok || isDev ? 'draft' : 'published'
-        this.$storyapi.get(`cdn/stories/`, {
+        return this.$storyapi.get(`cdn/stories/`, {
           version: version,
           starts_with: 'projects/'
         }).then(res => {
-          commit('setStories', res.data)
+          commit('setStories', res.data.stories)
         })
       }
     }
