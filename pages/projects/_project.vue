@@ -68,23 +68,34 @@ export default {
       return "700x0"
     },
     projects() {
-      return this.$store.state.projects
+      this.$store.state.projects
+      if (this.$store.state.projects !== null && this.$store.state.projects.length > 0) {
+        return this.$store.state.projects
+      }
     },
     currentProject() {
-      return this.projects.findIndex(x => x.slug === this.$route.params.project)
+      this.projects
+      if(this.projects !== undefined) {
+        return this.$store.state.projects.findIndex(x => x.slug === this.$route.params.project)
+      }
     },
     next() {
-      if (this.currentProject === this.projects.length - 1) {
-        return 0
-      } else {
-        return this.currentProject + 1
+      this.currentProject
+      if (this.currentProject !== undefined) {
+        if (this.currentProject === this.projects.length - 1) {
+          return 0
+        } else {
+          return this.currentProject + 1
+        }
       }
     },
     prev() {
-      if (this.currentProject === 0) {
-        return this.projects.length - 1
-      } else {
-        return this.currentProject - 1
+      if (this.currentProject !== undefined) {
+        if (this.currentProject === 0) {
+          return this.projects.length - 1
+        } else {
+          return this.currentProject - 1
+        }
       }
     }
   },
