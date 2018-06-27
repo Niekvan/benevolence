@@ -13,7 +13,7 @@ const createStore = () => {
     },
     actions: {
       async nuxtServerInit({ commit }, { query, isDev }) {
-        console.log('server init....')
+        // console.log('server init....')
         let version = query._storyblok || isDev ? 'draft' : 'published'
         return this.$storyapi.get(`cdn/stories/`, {
           version: version,
