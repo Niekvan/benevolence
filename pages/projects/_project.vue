@@ -53,10 +53,11 @@ if (process.browser) {
 }
 
 export default {
+  scrollToTop: true,
   data() {
     return {
       viewportWidth: 0,
-      start: false,
+      trigger: false,
       instances: []
     }
   },
@@ -69,34 +70,29 @@ export default {
     },
     projects() {
       this.$store.state.projects
-      // if (this.$store.state.projects !== null && this.$store.state.projects.length > 0) {
         return this.$store.state.projects
-      // }
     },
     currentProject() {
       this.projects
-      // if(this.projects !== undefined) {
         return this.projects.findIndex(x => x.slug === this.$route.params.project)
-      // }
     },
     next() {
       this.currentProject
-      // if (this.currentProject !== undefined) {
         if (this.currentProject === this.projects.length - 1) {
           return 0
         } else {
           return this.currentProject + 1
         }
-      // }
     },
     prev() {
-      // if (this.currentProject !== undefined) {
         if (this.currentProject === 0) {
           return this.projects.length - 1
         } else {
           return this.currentProject - 1
         }
-      // }
+    },
+    start() {
+      return this.trigger
     }
   },
   methods: {
@@ -109,7 +105,7 @@ export default {
       }
     },
     startAnimation() {
-      this.start = true
+      this.trigger = true
       document.querySelectorAll('.element').forEach((elem, i) => {
         const direction = elem.getAttribute('data-modifier') === 'imageProject' ? {from: '0', to: '-100px'} : {from: '0', to: '200px'}
         this.instances.push(basicScroll.create({
@@ -122,9 +118,12 @@ export default {
         }
       }))
       })
-      this.instances.forEach(instance => instance.start())
+      this.$nextTick(function() {
+        this.instances.forEach(instance => instance.start())
+      })
     },
     stopAnimation() {
+      console.log('stop')
       this.start = false
       this.instances.forEach(instance => instance.destroy())
     }
@@ -134,10 +133,8 @@ export default {
     this.$storyblok.on('change', function () {
       window.location.reload()
     })
-    this.$nextTick(function() {
-      window.addEventListener('resize', this.getWidth)
-      this.getWidth()
-    })
+    window.addEventListener('resize', this.getWidth)
+    this.getWidth()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.getWidth)

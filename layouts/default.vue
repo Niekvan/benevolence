@@ -1,11 +1,24 @@
 <template>
   <div>
-    <nuxt/>
+    <nuxt :style="styles" />
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      styles: {
+        'background-image': `url(${this.$store.state.settings.content.background_image})`
+      }
+    }
+  }
+}
+</script>
+
+
 <style lang= 'scss'>
 html {
-  background: $color-primary;
+  background-color: $color-primary;
 }
 </style>
