@@ -38,46 +38,45 @@ module.exports = {
     { src: '~/plugins/slick.js', ssr: false }
   ],
   router: {
-    scrollBehavior(to, from, savedPosition) {
-      let position = false
+    // scrollBehavior(to, from, savedPosition) {
+    //   let position = false
 
-      // savedPosition is only available for popstate navigations (back button)
-      if (savedPosition) {
-        position = savedPosition
-      }
+    //   // savedPosition is only available for popstate navigations (back button)
+    //   if (savedPosition) {
+    //     position = savedPosition
+    //   }
 
-      // if no children detected
-      if (to.matched.length < 2) {
-        // scroll to the top of the page
-        position = {
-          x: 0,
-          y: 0
-        }
-      } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
-        // if one of the children has scrollToTop option set to true
-        position = {
-          x: 0,
-          y: 0
-        }
-      }
+    //   // if no children detected
+    //   if (to.matched.length < 2) {
+    //     // scroll to the top of the page
+    //     position = {
+    //       x: 0,
+    //       y: 0
+    //     }
+    //   } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
+    //     // if one of the children has scrollToTop option set to true
+    //     position = {
+    //       x: 0,
+    //       y: 0
+    //     }
+    //   }
 
-      return new Promise(resolve => {
-        window.$nuxt.$once('triggerScroll', () => {
-          if (to.hash && document.querySelector(to.hash)) {
-            position = {
-              selector: to.hash
-            }
-          }
-          resolve(position)
-        })
-      })
-    }
+    //   return new Promise(resolve => {
+    //     window.$nuxt.$once('triggerScroll', () => {
+    //       if (to.hash && document.querySelector(to.hash)) {
+    //         position = {
+    //           selector: to.hash
+    //         }
+    //       }
+    //       resolve(position)
+    //     })
+    //   })
+    // }
   },
   /*
   ** Build configuration
   */
   build: {
-    vendors: ['basicscroll'],
     /*
     ** Run ESLint on save
     */

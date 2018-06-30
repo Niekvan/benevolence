@@ -21,16 +21,12 @@
         </div>
       </div>
       <div class="row project-images">
-        <div class="col-12 col-md-6 element" :class="image.component === 'textProject' ? 'text-project':'image-project'" v-for="image in story.content.images" :key="image._uid" :data-modifier="image.component">
+        <div class="col-12 col-md-6" :class="image.component === 'textProject' ? 'text-project':'image-project'" v-for="image in story.content.images" :key="image._uid" :data-modifier="image.component">
           <div v-if="image.component === 'imageProject'">
-            <!-- <div class="col-12 col-md-6"> -->
-              <img-resize :size="sizeSmall" :link="image.image"/>
-            <!-- </div> -->
+              <img-resize v-parallax="-0.2" :size="sizeSmall" :link="image.image"/>
           </div>
           <div v-if="image.component === 'textProject'">
-            <!-- <div class="col-12 col-md-6"> -->
-              <p>{{image.text}}</p>
-            <!-- </div> -->
+              <p v-parallax.absY="0.2">{{image.text}}</p>
           </div>
         </div>
       </div>
@@ -47,18 +43,10 @@
 </template>
 
 <script>
-let basicScroll
-if (process.browser) {
-  basicScroll = require('basicscroll')
-}
-
 export default {
-  scrollToTop: true,
   data() {
     return {
       viewportWidth: 0,
-      trigger: false,
-      instances: []
     }
   },
   computed: {
@@ -91,53 +79,12 @@ export default {
           return this.currentProject - 1
         }
     },
-    start() {
-      return this.trigger
-    }
-  },
-  methods: {
-    getWidth(event) {
-      this.viewportWidth = document.documentElement.clientWidth;
-      if(this.viewportWidth > 786 && this.start === false) {
-        this.startAnimation()
-      } else if (this.viewportWidth <= 786) {
-        this.stopAnimation()
-      }
-    },
-    startAnimation() {
-      this.trigger = true
-      document.querySelectorAll('.element').forEach((elem, i) => {
-        const direction = elem.getAttribute('data-modifier') === 'imageProject' ? {from: '0', to: '-100px'} : {from: '0', to: '200px'}
-        this.instances.push(basicScroll.create({
-        elem: elem,
-        from: 'middle-bottom',
-        to: 'bottom-top',
-        direct: true,
-        props: {
-          '--ty': direction
-        }
-      }))
-      })
-      this.$nextTick(function() {
-        this.instances.forEach(instance => instance.start())
-      })
-    },
-    stopAnimation() {
-      console.log('stop')
-      this.start = false
-      this.instances.forEach(instance => instance.destroy())
-    }
   },
   mounted () {
     this.$storyblok.init()
     this.$storyblok.on('change', function () {
       window.location.reload()
     })
-    window.addEventListener('resize', this.getWidth)
-    this.getWidth()
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.getWidth)
   },
   asyncData(context) {
     let version = context.query._storyblok || context.isDev ? 'draft' : 'published'
@@ -209,18 +156,12 @@ export default {
       margin-top: 10rem;
     }
 
-    .element {
-      transform: translateY(var(--ty));
-      will-change: transform;
-      padding-bottom: 3rem;
+    .text-project {
+      z-index: 5;
+    }
 
-      &.text-project {
-        z-index: 5;
-      }
-
-      &.image-project {
-        z-index: 1;
-      }
+    .image-project {
+      z-index: 1;
     }
 
 
@@ -232,7 +173,8 @@ export default {
   .pagination {
     position: relative;
     z-index: 999;
-    padding-bottom: 1rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
     a {
       color: $color-type-primary;
       font-size: $font-size-body;

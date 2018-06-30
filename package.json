@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "@nuxtjs/moment": "^1.0.0",
-    "basicscroll": "^2.1.1",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "nuxt": "^1.0.0",
     "nuxt-sass-resources-loader": "^2.0.2",
     "storyblok-nuxt": "0.0.3",
+    "vue-parallax-js": "^0.1.2",
     "vue-slick": "^1.1.13"
   },
   "devDependencies": {
