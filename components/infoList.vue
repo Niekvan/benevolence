@@ -16,7 +16,11 @@
       <div class="col-12 partners">
         <h4>Our partners:</h4>
         <slick ref="slick" :options="slickOptions">
-          <img-resize v-for="image in data.logos" :key="image._uid" :link="image.image" size="300x0" class="logo" />
+          <div v-for="image in data.logos" :key="image._uid" class="logo_wrapper">
+            <div class="logo">
+              <img :src="image.image" />
+            </div>
+          </div>
         </slick>
       </div>
     </div>
@@ -74,9 +78,30 @@ export default {
         }
       }
     }
+    
+    .partners {
+      padding-top: 2rem;
 
-    .logo {
-      padding: 0.5rem;
+      .logo_wrapper {
+        height: 50pt;
+        box-sizing: border-box;
+        margin-top: 2rem;
+      }
+
+      .logo {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        
+        img {
+          display: block;
+          max-height: 50pt;
+          width: 100%;
+          filter: grayscale(100%)invert(100%);
+        }
+      }
     }
   }
 </style>

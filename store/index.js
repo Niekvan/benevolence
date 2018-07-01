@@ -9,7 +9,7 @@ const createStore = () => {
     },
     mutations: {
       setStories(state, data) {
-        state.projects = data
+        state.projects = data.reverse()
       },
       setSettings(state, story) {
         state.settings = story

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <nuxt :style="styles" />
+    <nuxt />
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      styles: {
-        'background-image': `url(${this.$store.state.settings.content.background_image})`
-      }
-    }
-  }
+  // data() {
+  //   return {
+  //     styles: {
+  //       'background-image': `url(${this.$store.state.settings.content.background_image})`
+  //     }
+  //   }
+  // }
 }
 </script>
 

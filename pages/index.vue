@@ -1,8 +1,9 @@
 <template>
   <section class="wrapper">
-    <div class="row slide center overflow" id="home">
+    <div class="row slide center overflow" id="home" :style="styles">
       <img-resize :link="randomImage.image" :size="size" class="random-image" :style="placement" />
       <div class="col-12">
+        <h4 class="before-title">{{story.content.before_title}}</h4>
         <h1 class="title" v-editable="story.content">{{story.content.title}}</h1>
       </div>
     </div>
@@ -33,6 +34,9 @@ export default {
     return {
       story: { content: {} },
       trigger: 0,
+      styles: {
+        'background-image': `url(${this.$store.state.settings.content.background_image})`
+      }
     }
   },
   computed: {
@@ -94,6 +98,12 @@ export default {
   position: absolute;
 }
 
+.before-title {
+  @include media-breakpoint-down(sm) {
+    text-align: left;
+  }
+}
+
 .title {
   font-size: 3rem;
   text-transform: uppercase;
@@ -113,8 +123,13 @@ export default {
 }
 
 .intro {
-  background: #000;
+  background: $color-primary;
   padding: 2rem 0;
+
+  p {
+    color: #F04F65;
+    @include smaller;
+  }
 }
 
 .center {
@@ -127,6 +142,7 @@ export default {
   min-height: 100vh;
   box-sizing: border-box;
   padding: 5rem 0;
+
   h4 {
     margin-bottom: 3rem;
   }

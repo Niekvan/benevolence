@@ -25,6 +25,7 @@ export default {
   .project {
     text-align: left;
     position: relative;
+    padding-bottom: 1rem;
 
     div {
       &.links {

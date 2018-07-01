@@ -39,7 +39,7 @@ export default {
       content: '';
       width: 3px;
       height: $font-size-body;
-      background: black;
+      background: $color-type-accent;
 
       position: absolute;
       top: 0;
@@ -71,7 +71,7 @@ export default {
     width: 0;
     display: flex;
     justify-content: space-between;
-    background: blue;
+    background: $color-light;
     overflow: hidden;
 
     margin-top: -$font-size-body;

@@ -9,6 +9,8 @@ $heading-scale: 1; // amount of px headings grow from h6 to h1
 }
 
 p {
+  // background-color: $color-primary;
+  // padding: 1rem;
   // font-size: $font-size-body-large;
   text-align: left;
   @include media-breakpoint-up(sm) {

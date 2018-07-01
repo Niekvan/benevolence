@@ -1,6 +1,10 @@
 /* COLORS */
 $color-primary: #045C63;
+$color-light: #7FD2E9;
+
 $color-type-primary: #FFFFFF;
+$color-type-accent: #F04F65;
+
 
 /* FONTS */
 $font-size-base: 1rem;
@@ -13,10 +17,7 @@ $font-size-title-spread: 14rem;
   @include media-breakpoint-up(sm) {
     font-size: $font-size-body;
     line-height: $font-size-body+0.25*($font-size-body);
-  } // @include media-breakpoint-up(lg) {
-  //   font-size: $font-size-body;
-  //   line-height: $font-size-body+0.25*($font-size-body);
-  // }
+  }
 }
 
 /* OTHER VARIABLES */

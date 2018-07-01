@@ -26,7 +26,7 @@
               <img-resize v-parallax="-0.2" :size="sizeSmall" :link="image.image"/>
           </div>
           <div v-if="image.component === 'textProject'">
-              <p v-parallax.absY="0.2">{{image.text}}</p>
+              <p v-parallax="0">{{image.text}}</p>
           </div>
         </div>
       </div>
@@ -115,6 +115,8 @@ export default {
     }
     
     h1 {
+      position: relative;
+      z-index: 10;
       font-size: 5rem;
       @include media-breakpoint-up(sm) {
         font-size: 5rem;
@@ -132,6 +134,9 @@ export default {
   }
 
   .project-details {
+    position: relative;
+    z-index: 1;
+    
     padding-bottom: 2rem;
     @include media-breakpoint-up(md) {
       display: flex;
